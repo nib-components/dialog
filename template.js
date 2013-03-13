@@ -1,0 +1,1 @@
+module.exports = '<div class="dialog is-closed">\n  <i class="icon-close-large js-close dialog__close"></i>\n  <div class="dialog__body js-content"></div>\n</div>';
