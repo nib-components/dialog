@@ -1,10 +1,10 @@
 {
   "name": "dialog",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Create dialogs with static content or via AJAX",
   "scripts": ["index.js", "template.js"],
   "dependencies": {
-    "nib-components/overlay": "0.0.*",
-    "nib-components/utils": "0.0.*"
+    "nib-components/overlay": "0.0.1",
+    "nib-components/utils": "0.0.1"
   }
 }
