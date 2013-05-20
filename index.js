@@ -39,10 +39,12 @@ function Dialog(options) {
     hiddenClass: 'is-closed',
     show: true,
     closable: true,
-    overlay: true
+    overlay: true,
+    parent: document.body,
+    fixed: true
   });
 
-  this.render(); 
+  this.render();
 
   // Hide any other active dialogs
   if (active && !active.hiding) {
@@ -111,20 +113,27 @@ Dialog.prototype.show = function(){
     loading.resolve(this.options.content);
   }
 
-  var overlay = new Overlay();
+  var overlay = new Overlay({
+    parent: this.options.parent,
+    closable: this.options.closable,
+    fixed: this.options.fixed
+  });
+
   overlay.show().loading(true);
   overlay.on('hide', this.hide, this);
 
-  $(document).on('keydown.dialog', function(e){
-    if (27 != e.which) return;
-    self.hide();
-  });
+  if( this.options.closable ) {
+    $(document).on('keydown.dialog', function(e){
+      if (27 != e.which) return;
+      self.hide();
+    });
+  }
 
   // When the content is ready
   loading.done(function(content){
     overlay.loading(false).show();
     el.find('.js-content').empty().html(content);
-    el.appendTo('body');
+    el.appendTo(self.options.parent);
     setTimeout(function(){
       el.removeClass(self.options.hiddenClass);
       el.css({
