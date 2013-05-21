@@ -41,13 +41,14 @@ function Dialog(options) {
     closable: true,
     overlay: true,
     parent: document.body,
-    fixed: true
+    fixed: true,
+    hideOthers: true
   });
 
   this.render();
 
   // Hide any other active dialogs
-  if (active && !active.hiding) {
+  if (active && !active.hiding && options.hideOthers) {
     active.hide();
   }
 
