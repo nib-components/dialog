@@ -55,6 +55,15 @@ function Dialog(options) {
   // And set this as the current active dialog
   active = this;
 
+  this.overlay = new Overlay({
+    parent: this.options.parent,
+    closable: this.options.closable,
+    fixed: this.options.fixed
+  });
+
+  this.overlay.on('hide', this.hide, this);
+  this.on('hide', this.overlay.hide, this.overlay);
+
   // Immediately show the dialog
   if(this.options.show) {
     this.show();
@@ -114,14 +123,9 @@ Dialog.prototype.show = function(){
     loading.resolve(this.options.content);
   }
 
-  var overlay = new Overlay({
-    parent: this.options.parent,
-    closable: this.options.closable,
-    fixed: this.options.fixed
-  });
-
-  overlay.show().loading(true);
-  overlay.on('hide', this.hide, this);
+  if(this.options.overlay) {
+    this.overlay.show().loading(true);
+  }
 
   if( this.options.closable ) {
     $(document).on('keydown.dialog', function(e){
@@ -132,7 +136,11 @@ Dialog.prototype.show = function(){
 
   // When the content is ready
   loading.done(function(content){
-    overlay.loading(false).show();
+
+    if(self.options.overlay) {
+      self.overlay.loading(false).show();
+    }
+
     el.find('.js-content').empty().html(content);
     el.appendTo(self.options.parent);
     setTimeout(function(){
@@ -146,8 +154,12 @@ Dialog.prototype.show = function(){
     self.trigger('show');
   });
 
-  this.on('hide', overlay.hide, overlay);
   return this;
+};
+
+Dialog.prototype.loading = function(bool) {
+  this.el.toggleClass(this.options.hiddenClass, bool);
+  this.overlay.loading(bool);
 };
 
 /**
