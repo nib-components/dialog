@@ -1,10 +1,18 @@
 {
   "name": "dialog",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "Create dialogs with static content or via AJAX",
   "scripts": ["index.js", "template.js"],
   "dependencies": {
-    "nib-components/overlay": "0.0.3",
-    "nib-components/utils": "0.0.1"
+    "anthonyshort/after-transition": "0.0.3",
+    "component/event": "master",
+    "component/delegate": "master",
+    "component/domify": "master",
+    "component/emitter": "master",
+    "matthewp/xhr": "master",
+    "nib-components/overlay": "0.1.0"
+  },
+  "development": {
+    "chaijs/chai": "master"
   }
 }
