@@ -13,14 +13,6 @@ var afterTransition = require('after-transition');
 var active;
 
 /**
- * Determine if the browser can do transforms
- * @type {String}
- */
-var canTransform = function() {
-  return "MozTransform" in document.body.style || "webkitTransform" in document.body.style || "transform" in document.body.style;
-};
-
-/**
  * Cross-browser scrollTop
  * @return {Number}
  */
@@ -216,8 +208,9 @@ Dialog.prototype.getContent = function() {
  * @return {Dialog}
  */
 Dialog.prototype.reposition = function() {
-  this.el.style.top = this.options.top || scrollTop();
-  this.el.style.marginLeft = canTransform() ? this.el.clientWidth * -0.5 : null;
+  this.el.style.top = this.options.top || (scrollTop() + 40);
+  this.el.style.marginLeft = (this.el.clientWidth * -0.5) + 'px';
+  this.el.style.left = "50%";
 };
 
 /**
@@ -230,9 +223,9 @@ Dialog.prototype.showContent = function(content) {
     this.setContent(content);
     afterTransition.once(this.el, this.emit.bind(this, 'show finished'));
     this.removeClass(this.options.hiddenClass);
-    this.reposition();
     this.emit('show');
   }.bind(this), 0);
+  this.reposition();
 };
 
 /**
