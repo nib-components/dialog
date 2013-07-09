@@ -220,12 +220,13 @@ Dialog.prototype.reposition = function() {
  */
 Dialog.prototype.showContent = function(content) {
   setTimeout(function(){
+    this.enterDocument();
     this.setContent(content);
     afterTransition.once(this.el, this.emit.bind(this, 'show finished'));
     this.removeClass(this.options.hiddenClass);
+    this.reposition();
     this.emit('show');
   }.bind(this), 0);
-  this.reposition();
 };
 
 /**
@@ -242,7 +243,6 @@ Dialog.prototype.show = function(){
     return false;
   }
   this.hiding = false;
-  this.enterDocument();
 
   // Get the content and show it
   if(this.options.url) {
