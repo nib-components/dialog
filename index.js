@@ -208,7 +208,7 @@ Dialog.prototype.getContent = function() {
  * @return {Dialog}
  */
 Dialog.prototype.reposition = function() {
-  this.el.style.top = this.options.top || (scrollTop() + 40);
+  this.el.style.top = this.options.top || (scrollTop() + 40 + "px");
   this.el.style.marginLeft = (this.el.clientWidth * -0.5) + 'px';
   this.el.style.left = "50%";
 };
