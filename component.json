@@ -1,6 +1,6 @@
 {
   "name": "dialog",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Create dialogs with static content or via AJAX",
   "scripts": ["index.js", "template.js"],
   "dependencies": {
