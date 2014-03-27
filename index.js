@@ -27,7 +27,7 @@ var scrollTop = function() {
 Dialog.defaults = {
   hiddenClass: 'is-closed',
   show: true,
-  closable: true,
+  closeable: true,
   overlay: true,
   parent: document.body,
   fixed: true,
@@ -105,7 +105,7 @@ Dialog.prototype.normalizeOptions = function(options) {
 Dialog.prototype.createOverlay = function() {
   var overlay = new Overlay({
     parent: this.options.parent,
-    closable: this.options.closable,
+    closeable: this.options.closeable,
     fixed: this.options.fixed
   });
   overlay.on('hide', this.hide.bind(this));
@@ -129,7 +129,7 @@ Dialog.prototype.createOverlay = function() {
  * @return {void}
  */
 Dialog.prototype.onKeyDown = function(e) {
-  if (27 != e.which || this.options.closable === false) return;
+  if (27 != e.which || this.options.closeable === false) return;
   this.hide();
 };
 
@@ -147,8 +147,8 @@ Dialog.prototype.render = function(){
   if(this.options.classes) {
     this.addClass(this.options.classes);
   }
-  if(this.options.closable) {
-    this.addClass('is-closable');
+  if(this.options.closeable) {
+    this.addClass('is-closeable');
   }
   if(this.options.show) {
     this.show();
